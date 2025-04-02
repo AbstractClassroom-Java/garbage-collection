@@ -60,6 +60,23 @@ You can't control GC directly, but you can:
 
 ---
 
+Developers might call `System.gc()` to **suggest** that the JVM perform garbage collection, usually in situations where they believe it could improve performance or free up memory proactively. However, it’s just a **request**, not a command—JVM may ignore it.
+
+### Common reasons developers call `gc()`:
+- **Manual cleanup after a large memory-intensive task** (e.g., after processing a big file or image).
+- **To reduce memory footprint** before a known memory spike.
+- **Benchmarking or profiling** where they want to start with a clean heap.
+- **Tuning behavior** in memory-constrained environments.
+
+Still, it's generally **not recommended** in production code because:
+- GC is **already optimized** by the JVM.
+- Manual calls can introduce **unpredictable pauses**.
+
+Letting the JVM manage GC is usually the best approach unless you're debugging or doing performance tuning.
+
+---
+
+
 ###  Summary
 Garbage collection in Java:
 - Automatically frees memory
